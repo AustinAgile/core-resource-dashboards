@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: core-resource-dashboards
+  namespace: {{ .Values.global.namespace }}
+  annotations:
+    Release.Name: {{ .Release.Name }}
+    Release.Revision: "{{ .Release.Revision }}"
+    Chart.Name: {{ .Chart.Name }}
+    Chart.Version: {{ .Chart.Version }}
+    grafana-dashboard-gateway/source: "dashboard"
+data:
+  {{ (.Files.Glob "dashboards/Pod_Stats.json").AsConfig }}
+  {{ (.Files.Glob "dashboards/Node_Loads.json").AsConfig }}
