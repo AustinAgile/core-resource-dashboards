@@ -31,7 +31,7 @@
 	"gnetId": null,
 	"graphTooltip": 0,
 	"id": null,
-	"iteration": 1534263814379,
+	"iteration": 1535052445147,
 	"links": [],
 	"panels": [
 		{
@@ -49,12 +49,14 @@
 			},
 			"id": 1,
 			"legend": {
-				"alignAsTable": false,
+				"alignAsTable": true,
 				"avg": true,
 				"current": true,
 				"max": true,
 				"min": true,
+				"rightSide": true,
 				"show": true,
+				"sideWidth": 600,
 				"total": false,
 				"values": true
 			},
@@ -83,7 +85,7 @@
 					"hide": false,
 					"interval": "",
 					"intervalFactor": 2,
-					"legendFormat": "",
+					"legendFormat": "{{pod_name}}",
 					"refId": "A"
 				}
 			],
@@ -150,14 +152,16 @@
 			},
 			"id": 2,
 			"legend": {
-				"alignAsTable": false,
-				"avg": false,
-				"current": false,
-				"max": false,
-				"min": false,
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": true,
+				"rightSide": true,
 				"show": true,
+				"sideWidth": 600,
 				"total": false,
-				"values": false
+				"values": true
 			},
 			"lines": true,
 			"linewidth": 1,
@@ -184,6 +188,7 @@
 					"hide": false,
 					"instant": false,
 					"intervalFactor": 2,
+					"legendFormat": "{{pod_name}}",
 					"refId": "A"
 				}
 			],
@@ -228,6 +233,7 @@
 			}
 		}
 	],
+	"refresh": false,
 	"schemaVersion": 16,
 	"style": "dark",
 	"tags": [],
@@ -250,7 +256,7 @@
 		]
 	},
 	"time": {
-		"from": "now-6h",
+		"from": "now-15m",
 		"to": "now"
 	},
 	"timepicker": {
@@ -281,5 +287,5 @@
 	"timezone": "",
 	"title": "Pod Stats",
 	"uid": "v5MPBj5mz",
-	"version": 5
+	"version": 2
 }
