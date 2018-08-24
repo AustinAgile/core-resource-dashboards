@@ -1,4 +1,40 @@
 {
+	"__inputs": [
+		{
+			"name": "DS_MONITORING",
+			"label": "Monitoring",
+			"description": "",
+			"type": "datasource",
+			"pluginId": "prometheus",
+			"pluginName": "Prometheus"
+		}
+	],
+	"__requires": [
+		{
+			"type": "grafana",
+			"id": "grafana",
+			"name": "Grafana",
+			"version": "5.2.0"
+		},
+		{
+			"type": "panel",
+			"id": "graph",
+			"name": "Graph",
+			"version": "5.0.0"
+		},
+		{
+			"type": "datasource",
+			"id": "prometheus",
+			"name": "Prometheus",
+			"version": "5.0.0"
+		},
+		{
+			"type": "panel",
+			"id": "singlestat",
+			"name": "Singlestat",
+			"version": "5.0.0"
+		}
+	],
 	"annotations": {
 		"list": [
 			{
@@ -15,23 +51,10 @@
 	"editable": true,
 	"gnetId": null,
 	"graphTooltip": 0,
-	"id": 14,
-	"iteration": 1535141389471,
+	"id": null,
+	"iteration": 1535147446759,
 	"links": [],
 	"panels": [
-		{
-			"collapsed": false,
-			"gridPos": {
-				"h": 1,
-				"w": 24,
-				"x": 0,
-				"y": 0
-			},
-			"id": 28,
-			"panels": [],
-			"title": "Node Spec",
-			"type": "row"
-		},
 		{
 			"cacheTimeout": null,
 			"colorBackground": false,
@@ -41,7 +64,7 @@
 				"rgba(237, 129, 40, 0.89)",
 				"#d44a3a"
 			],
-			"datasource": null,
+			"datasource": "$DS_MONITORING",
 			"format": "s",
 			"gauge": {
 				"maxValue": 100,
@@ -54,7 +77,87 @@
 				"h": 4,
 				"w": 4,
 				"x": 0,
-				"y": 1
+				"y": 0
+			},
+			"id": 30,
+			"interval": null,
+			"links": [],
+			"mappingType": 1,
+			"mappingTypes": [
+				{
+					"name": "value to text",
+					"value": 1
+				},
+				{
+					"name": "range to text",
+					"value": 2
+				}
+			],
+			"maxDataPoints": 100,
+			"nullPointMode": "connected",
+			"nullText": null,
+			"postfix": "",
+			"postfixFontSize": "50%",
+			"prefix": "",
+			"prefixFontSize": "50%",
+			"rangeMaps": [
+				{
+					"from": "null",
+					"text": "N/A",
+					"to": "null"
+				}
+			],
+			"sparkline": {
+				"fillColor": "rgba(31, 118, 189, 0.18)",
+				"full": false,
+				"lineColor": "rgb(31, 120, 193)",
+				"show": false
+			},
+			"tableColumn": "",
+			"targets": [
+				{
+					"expr": "max(node_time{instance=~\"(${node:pipe}).*\"} - node_boot_time{instance=~\"(${node:pipe}).*\"})",
+					"format": "time_series",
+					"intervalFactor": 1,
+					"refId": "A"
+				}
+			],
+			"thresholds": "",
+			"title": "Max Uptime (selected nodes)",
+			"type": "singlestat",
+			"valueFontSize": "80%",
+			"valueMaps": [
+				{
+					"op": "=",
+					"text": "N/A",
+					"value": "null"
+				}
+			],
+			"valueName": "avg"
+		},
+		{
+			"cacheTimeout": null,
+			"colorBackground": false,
+			"colorValue": false,
+			"colors": [
+				"#299c46",
+				"rgba(237, 129, 40, 0.89)",
+				"#d44a3a"
+			],
+			"datasource": "$DS_MONITORING",
+			"format": "s",
+			"gauge": {
+				"maxValue": 100,
+				"minValue": 0,
+				"show": false,
+				"thresholdLabels": false,
+				"thresholdMarkers": true
+			},
+			"gridPos": {
+				"h": 4,
+				"w": 4,
+				"x": 4,
+				"y": 0
 			},
 			"id": 24,
 			"interval": null,
@@ -93,7 +196,7 @@
 			"tableColumn": "",
 			"targets": [
 				{
-					"expr": "node_time{instance=~\"$node:.*\"} - node_boot_time{instance=~\"$node:.*\"}",
+					"expr": "sum(node_time{instance=~\"(${node:pipe}).*\"} - node_boot_time{instance=~\"(${node:pipe}).*\"})/count(node_boot_time{instance=~\"(${node:pipe}).*\"})",
 					"format": "time_series",
 					"intervalFactor": 1,
 					"legendFormat": "",
@@ -101,7 +204,7 @@
 				}
 			],
 			"thresholds": "",
-			"title": "Uptime",
+			"title": "Average Uptime (selected nodes)",
 			"type": "singlestat",
 			"valueFontSize": "80%",
 			"valueMaps": [
@@ -122,7 +225,7 @@
 				"rgba(237, 129, 40, 0.89)",
 				"#d44a3a"
 			],
-			"datasource": null,
+			"datasource": "$DS_MONITORING",
 			"format": "bytes",
 			"gauge": {
 				"maxValue": 100,
@@ -134,8 +237,8 @@
 			"gridPos": {
 				"h": 4,
 				"w": 4,
-				"x": 4,
-				"y": 1
+				"x": 8,
+				"y": 0
 			},
 			"id": 20,
 			"interval": null,
@@ -174,14 +277,15 @@
 			"tableColumn": "",
 			"targets": [
 				{
-					"expr": "node_memory_MemTotal{instance=~\"$node:.*\"}",
+					"expr": "sum(node_memory_MemTotal{instance=~\"(${node:pipe}).*\"})",
 					"format": "time_series",
 					"intervalFactor": 1,
 					"refId": "A"
 				}
 			],
 			"thresholds": "",
-			"title": "Total RAM",
+			"title": "Total RAM (selected nodes)",
+			"transparent": false,
 			"type": "singlestat",
 			"valueFontSize": "80%",
 			"valueMaps": [
@@ -202,7 +306,7 @@
 				"rgba(237, 129, 40, 0.89)",
 				"#d44a3a"
 			],
-			"datasource": null,
+			"datasource": "$DS_MONITORING",
 			"format": "none",
 			"gauge": {
 				"maxValue": 100,
@@ -214,8 +318,8 @@
 			"gridPos": {
 				"h": 4,
 				"w": 4,
-				"x": 8,
-				"y": 1
+				"x": 12,
+				"y": 0
 			},
 			"id": 22,
 			"interval": null,
@@ -254,14 +358,14 @@
 			"tableColumn": "",
 			"targets": [
 				{
-					"expr": "count(count(node_cpu{instance=~\"$node:.*\"}) by (cpu))",
+					"expr": "count(sum(node_cpu{instance=~\"(${node:pipe}).*\"}) by (cpu,instance))",
 					"format": "time_series",
 					"intervalFactor": 1,
 					"refId": "A"
 				}
 			],
 			"thresholds": "",
-			"title": "CPU Cores",
+			"title": "Total CPU Cores (selected nodes)",
 			"type": "singlestat",
 			"valueFontSize": "80%",
 			"valueMaps": [
@@ -272,6 +376,19 @@
 				}
 			],
 			"valueName": "avg"
+		},
+		{
+			"collapsed": false,
+			"gridPos": {
+				"h": 1,
+				"w": 24,
+				"x": 0,
+				"y": 4
+			},
+			"id": 28,
+			"panels": [],
+			"title": "Node Spec",
+			"type": "row"
 		},
 		{
 			"collapsed": false,
@@ -302,14 +419,14 @@
 			"id": 6,
 			"legend": {
 				"alignAsTable": false,
-				"avg": false,
+				"avg": true,
 				"current": false,
 				"max": false,
 				"min": false,
 				"rightSide": false,
 				"show": true,
 				"total": false,
-				"values": false
+				"values": true
 			},
 			"lines": true,
 			"linewidth": 1,
@@ -359,7 +476,7 @@
 			"thresholds": [],
 			"timeFrom": null,
 			"timeShift": null,
-			"title": "Node CPU Usage",
+			"title": "Node CPU Usage ($node)",
 			"tooltip": {
 				"shared": true,
 				"sort": 0,
@@ -402,7 +519,7 @@
 			"bars": false,
 			"dashLength": 10,
 			"dashes": false,
-			"datasource": null,
+			"datasource": "$DS_MONITORING",
 			"fill": 1,
 			"gridPos": {
 				"h": 9,
@@ -412,13 +529,13 @@
 			},
 			"id": 16,
 			"legend": {
-				"avg": false,
-				"current": false,
-				"max": false,
-				"min": false,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": true,
 				"show": true,
 				"total": false,
-				"values": false
+				"values": true
 			},
 			"lines": true,
 			"linewidth": 1,
@@ -434,7 +551,7 @@
 			"steppedLine": false,
 			"targets": [
 				{
-					"expr": "node_load5{instance=~\"$node:.*\"}",
+					"expr": "node_load5{instance=~\"(${node:pipe}).*\"}",
 					"format": "time_series",
 					"intervalFactor": 1,
 					"legendFormat": "Load5",
@@ -444,7 +561,7 @@
 			"thresholds": [],
 			"timeFrom": null,
 			"timeShift": null,
-			"title": "Node System Load",
+			"title": "Node System Load ($node)",
 			"tooltip": {
 				"shared": true,
 				"sort": 0,
@@ -486,7 +603,7 @@
 			"bars": false,
 			"dashLength": 10,
 			"dashes": false,
-			"datasource": "Monitoring",
+			"datasource": "$DS_MONITORING",
 			"fill": 1,
 			"gridPos": {
 				"h": 9,
@@ -496,12 +613,12 @@
 			},
 			"id": 14,
 			"legend": {
-				"alignAsTable": true,
-				"avg": false,
-				"current": true,
+				"alignAsTable": false,
+				"avg": true,
+				"current": false,
 				"max": false,
 				"min": false,
-				"rightSide": true,
+				"rightSide": false,
 				"show": true,
 				"total": false,
 				"values": true
@@ -541,7 +658,7 @@
 			"thresholds": [],
 			"timeFrom": null,
 			"timeShift": null,
-			"title": "Network I/O",
+			"title": "Network I/O ($node)",
 			"tooltip": {
 				"shared": true,
 				"sort": 0,
@@ -583,7 +700,7 @@
 			"bars": false,
 			"dashLength": 10,
 			"dashes": false,
-			"datasource": null,
+			"datasource": "$DS_MONITORING",
 			"fill": 1,
 			"gridPos": {
 				"h": 9,
@@ -593,13 +710,13 @@
 			},
 			"id": 18,
 			"legend": {
-				"avg": false,
+				"avg": true,
 				"current": false,
 				"max": false,
 				"min": false,
 				"show": true,
 				"total": false,
-				"values": false
+				"values": true
 			},
 			"lines": true,
 			"linewidth": 1,
@@ -625,7 +742,7 @@
 			"thresholds": [],
 			"timeFrom": null,
 			"timeShift": null,
-			"title": "Node Disk I/O",
+			"title": "Node Disk I/O ($node)",
 			"tooltip": {
 				"shared": true,
 				"sort": 0,
@@ -674,7 +791,7 @@
 					"text": "Monitoring",
 					"value": "Monitoring"
 				},
-				"hide": 0,
+				"hide": 2,
 				"label": null,
 				"name": "DS_MONITORING",
 				"options": [],
@@ -685,15 +802,12 @@
 			},
 			{
 				"allValue": null,
-				"current": {
-					"text": "172.30.5.206",
-					"value": "172.30.5.206"
-				},
-				"datasource": "Monitoring",
+				"current": {},
+				"datasource": "${DS_MONITORING}",
 				"hide": 0,
-				"includeAll": false,
+				"includeAll": true,
 				"label": "node",
-				"multi": false,
+				"multi": true,
 				"name": "node",
 				"options": [],
 				"query": "label_values(node_boot_time{app=\"prometheus-node-exporter\"}, instance)",
@@ -740,5 +854,5 @@
 	"timezone": "",
 	"title": "Node_Load",
 	"uid": "dzOnGgtmk",
-	"version": 35
+	"version": 43
 }
