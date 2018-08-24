@@ -31,7 +31,7 @@
 	"gnetId": null,
 	"graphTooltip": 0,
 	"id": null,
-	"iteration": 1534289089247,
+	"iteration": 1535129690352,
 	"links": [],
 	"panels": [
 		{
@@ -49,12 +49,14 @@
 			},
 			"id": 1,
 			"legend": {
-				"alignAsTable": false,
+				"alignAsTable": true,
 				"avg": true,
 				"current": true,
 				"max": true,
 				"min": true,
+				"rightSide": true,
 				"show": true,
+				"sideWidth": 600,
 				"total": false,
 				"values": true
 			},
@@ -83,7 +85,7 @@
 					"hide": false,
 					"interval": "",
 					"intervalFactor": 2,
-					"legendFormat": "",
+					"legendFormat": "{{pod_name}}",
 					"refId": "A"
 				}
 			],
@@ -150,14 +152,16 @@
 			},
 			"id": 2,
 			"legend": {
-				"alignAsTable": false,
-				"avg": false,
-				"current": false,
-				"max": false,
-				"min": false,
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": true,
+				"rightSide": true,
 				"show": true,
+				"sideWidth": 600,
 				"total": false,
-				"values": false
+				"values": true
 			},
 			"lines": true,
 			"linewidth": 1,
@@ -184,6 +188,7 @@
 					"hide": false,
 					"instant": false,
 					"intervalFactor": 2,
+					"legendFormat": "{{pod_name}}",
 					"refId": "A"
 				}
 			],
@@ -238,7 +243,7 @@
 					"text": "Monitoring",
 					"value": "Monitoring"
 				},
-				"hide": 0,
+				"hide": 2,
 				"label": null,
 				"name": "DS_MONITORING",
 				"options": [],
@@ -279,7 +284,7 @@
 		]
 	},
 	"timezone": "",
-	"title": "Node_Load",
+	"title": "Node Loads",
 	"uid": "dzOnGgtmk",
-	"version": 3
+	"version": 4
 }
