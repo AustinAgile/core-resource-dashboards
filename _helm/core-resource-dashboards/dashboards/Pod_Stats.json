@@ -1,19 +1,4 @@
 {
-	"__inputs": [],
-	"__requires": [
-		{
-			"type": "grafana",
-			"id": "grafana",
-			"name": "Grafana",
-			"version": "5.2.0"
-		},
-		{
-			"type": "panel",
-			"id": "graph",
-			"name": "Graph",
-			"version": "5.0.0"
-		}
-	],
 	"annotations": {
 		"list": [
 			{
@@ -30,10 +15,201 @@
 	"editable": true,
 	"gnetId": null,
 	"graphTooltip": 0,
-	"id": null,
-	"iteration": 1535052445147,
+	"id": 15,
+	"iteration": 1535145034793,
 	"links": [],
 	"panels": [
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "Monitoring",
+			"fill": 4,
+			"gridPos": {
+				"h": 6,
+				"w": 24,
+				"x": 0,
+				"y": 0
+			},
+			"id": 14,
+			"legend": {
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"hideEmpty": false,
+				"hideZero": false,
+				"max": true,
+				"min": false,
+				"rightSide": true,
+				"show": true,
+				"sort": "avg",
+				"sortDesc": true,
+				"total": false,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "null",
+			"percentage": false,
+			"pointradius": 5,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "sort_desc(topk(10, sum by (pod_name)( rate(container_cpu_usage_seconds_total{pod_name!=\"\"}[1m] ) )))",
+					"format": "time_series",
+					"hide": false,
+					"intervalFactor": 2,
+					"legendFormat": "{{ pod_name }}",
+					"refId": "B",
+					"step": 20
+				},
+				{
+					"expr": "sum (rate (container_cpu_usage_seconds_total{id!=\"/\",pod_name=~\"^$Deployment.*$\"}[1m])) by (id)",
+					"format": "time_series",
+					"hide": true,
+					"intervalFactor": 2,
+					"legendFormat": "{{ pod_name }}",
+					"refId": "A",
+					"step": 20
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "TOP 10 CPU hungry PODs",
+			"tooltip": {
+				"shared": true,
+				"sort": 0,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "percent",
+					"label": "",
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
+		{
+			"aliasColors": {},
+			"bars": false,
+			"dashLength": 10,
+			"dashes": false,
+			"datasource": "Monitoring",
+			"fill": 1,
+			"gridPos": {
+				"h": 7,
+				"w": 24,
+				"x": 0,
+				"y": 6
+			},
+			"height": "",
+			"id": 15,
+			"legend": {
+				"alignAsTable": true,
+				"avg": true,
+				"current": true,
+				"max": true,
+				"min": false,
+				"rightSide": true,
+				"show": true,
+				"sort": "avg",
+				"sortDesc": true,
+				"total": false,
+				"values": true
+			},
+			"lines": true,
+			"linewidth": 1,
+			"links": [],
+			"nullPointMode": "null",
+			"percentage": false,
+			"pointradius": 5,
+			"points": false,
+			"renderer": "flot",
+			"seriesOverrides": [],
+			"spaceLength": 10,
+			"stack": false,
+			"steppedLine": false,
+			"targets": [
+				{
+					"expr": "sort_desc(topk(10, sum(container_memory_usage_bytes{pod_name!=\"\"}) by (pod_name)))",
+					"format": "time_series",
+					"intervalFactor": 2,
+					"legendFormat": "{{ pod_name }}",
+					"refId": "A",
+					"step": 20
+				}
+			],
+			"thresholds": [],
+			"timeFrom": null,
+			"timeShift": null,
+			"title": "Top 10 Ram hungry PODs",
+			"tooltip": {
+				"shared": true,
+				"sort": 2,
+				"value_type": "individual"
+			},
+			"type": "graph",
+			"xaxis": {
+				"buckets": null,
+				"mode": "time",
+				"name": null,
+				"show": true,
+				"values": []
+			},
+			"yaxes": [
+				{
+					"format": "decbytes",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				},
+				{
+					"format": "short",
+					"label": null,
+					"logBase": 1,
+					"max": null,
+					"min": null,
+					"show": true
+				}
+			],
+			"yaxis": {
+				"align": false,
+				"alignLevel": null
+			}
+		},
 		{
 			"aliasColors": {},
 			"bars": false,
@@ -45,7 +221,7 @@
 				"h": 10,
 				"w": 24,
 				"x": 0,
-				"y": 0
+				"y": 13
 			},
 			"id": 1,
 			"legend": {
@@ -148,7 +324,7 @@
 				"h": 7,
 				"w": 24,
 				"x": 0,
-				"y": 10
+				"y": 23
 			},
 			"id": 2,
 			"legend": {
@@ -287,5 +463,5 @@
 	"timezone": "",
 	"title": "Pod Stats",
 	"uid": "v5MPBj5mz",
-	"version": 2
+	"version": 7
 }
