@@ -52,7 +52,7 @@
 	"gnetId": null,
 	"graphTooltip": 0,
 	"id": null,
-	"iteration": 1535147446759,
+	"iteration": 1535388875108,
 	"links": [],
 	"panels": [
 		{
@@ -852,7 +852,7 @@
 		]
 	},
 	"timezone": "",
-	"title": "Node_Load",
+	"title": "Node Loads",
 	"uid": "dzOnGgtmk",
-	"version": 43
+	"version": 46
 }
