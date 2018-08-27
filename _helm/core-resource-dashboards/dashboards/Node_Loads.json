@@ -52,7 +52,7 @@
 	"gnetId": null,
 	"graphTooltip": 0,
 	"id": null,
-	"iteration": 1535388875108,
+	"iteration": 1535391984503,
 	"links": [],
 	"panels": [
 		{
@@ -445,28 +445,28 @@
 			"steppedLine": false,
 			"targets": [
 				{
-					"expr": "(avg by (instance) (irate(node_cpu{instance=~\"$node:9100\",mode=~\"system|irq|softirq\"}[5m])) * 100)",
+					"expr": "(avg by (instance) (irate(node_cpu{instance=~\"(${node:pipe}).*\",mode=~\"system|irq|softirq\"}[5m])) * 100)",
 					"format": "time_series",
 					"intervalFactor": 1,
 					"legendFormat": "System",
 					"refId": "A"
 				},
 				{
-					"expr": "(avg by (instance) (irate(node_cpu{instance=~\"$node:.*\",mode=\"user\"}[5m])) * 100)",
+					"expr": "(avg by (instance) (irate(node_cpu{instance=~\"(${node:pipe}).*\",mode=\"user\"}[5m])) * 100)",
 					"format": "time_series",
 					"intervalFactor": 1,
 					"legendFormat": "User",
 					"refId": "B"
 				},
 				{
-					"expr": "(avg by (instance) (irate(node_cpu{instance=~\"$node:.*\",mode=\"iowait\"}[5m])) * 100)",
+					"expr": "(avg by (instance) (irate(node_cpu{instance=~\"(${node:pipe}).*\",mode=\"iowait\"}[5m])) * 100)",
 					"format": "time_series",
 					"intervalFactor": 1,
 					"legendFormat": "I/O Wait",
 					"refId": "C"
 				},
 				{
-					"expr": "(avg by (instance) (irate(node_cpu{instance=~\"$node:.*\",mode=\"idle\"}[5m])) * 100)",
+					"expr": "(avg by (instance) (irate(node_cpu{instance=~\"(${node:pipe}).*\",mode=\"idle\"}[5m])) * 100)",
 					"format": "time_series",
 					"intervalFactor": 1,
 					"legendFormat": "Idle",
@@ -852,7 +852,7 @@
 		]
 	},
 	"timezone": "",
-	"title": "Node Loads",
+	"title": "Node Loads (v46)",
 	"uid": "dzOnGgtmk",
-	"version": 46
+	"version": 15
 }
