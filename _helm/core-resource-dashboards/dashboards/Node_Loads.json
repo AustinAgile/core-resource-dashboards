@@ -52,7 +52,7 @@
 	"gnetId": null,
 	"graphTooltip": 0,
 	"id": null,
-	"iteration": 1535393187950,
+	"iteration": 1536359932397,
 	"links": [],
 	"panels": [
 		{
@@ -783,7 +783,11 @@
 	"refresh": false,
 	"schemaVersion": 16,
 	"style": "dark",
-	"tags": [],
+	"tags": [
+		"Chart.Name:core-resource-dashboards",
+		"Chart.Version:1.1.0",
+		"Release.Name:monitoring"
+	],
 	"templating": {
 		"list": [
 			{
@@ -810,7 +814,7 @@
 				"multi": true,
 				"name": "node",
 				"options": [],
-				"query": "label_values(node_boot_time{app=\"prometheus-node-exporter\"}, instance)",
+				"query": "label_values(node_boot_time{pod=~\".*node-exporter.*\"}, instance)",
 				"refresh": 2,
 				"regex": "/([^:]+):.*/",
 				"sort": 0,
@@ -854,5 +858,5 @@
 	"timezone": "",
 	"title": "Node Loads",
 	"uid": "dzOnGgtmk",
-	"version": 24
+	"version": 35
 }
